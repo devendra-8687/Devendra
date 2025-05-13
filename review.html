@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leave a Birthday Message</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ccc;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-box {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d2691e;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #5d4037;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #d2691e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 20px;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a0522d;
+    }
+  </style>
+</head>
+<body>                          
+  <form class="form-box" action="https://formspree.io/f/mkgrqrrn" method="POST">
+    <h2>Want to send any message </h2>
+
+    <label for="memory">Rememberable Memory with Me</label>
+    <input type="text" name="memory" required>
+
+    <label for="vibe">What makes You special?</label>
+    <select name="vibe" required>
+      <option value="">-- Select --</option>
+      <option value="Her smile">Your smile</option>
+      <option value="Her kindness">Your kindness</option>
+      <option value="Her vibe">Your vibe</option>
+      <option value="Everything!">Everything! 💖</option>
+    </select>
+
+    <label for="message">Write a Special Message For me </label>
+    <textarea name="message" rows="4" placeholder="Let Me know how awesome you are!" required></textarea>
+
+    <button type="submit">Send to Me(Devendra)</button><br>  <h2>Made By me...(Devendra)</h2><br>
+  </form><br>
+
+</body>
+</html>
