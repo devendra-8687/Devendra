@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Bhavya!</title>
+  <style>
+   * {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 30px 15px;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.8s ease;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #deb887;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  transition: background-color 0.8s ease, border-color 0.8s ease;
+  animation: fadeInSlide 1s ease;
+}
+
+h1 {
+  font-size: 2.2em;
+  margin-bottom: 15px;
+  transition: color 0.8s ease;
+  animation: fadeIn 1s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  margin: 20px 0;
+  transition: transform 0.4s;
+  animation: fadeIn 1s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+
+p {
+  font-size: 1.1em;
+  font-style: italic;
+  transition: color 0.8s ease;
+  animation: fadeIn 1s ease;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.review-link {
+  display: inline-block;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="assets/birthday.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container" id="themeContainer">
+    <h1 id="title">🎉 Happy Birthday, Bhavya! 🐱</h1>
+    <img id="birthdayImage" src="https://devendra-8687.github.io/Devendra/Bhavya1.jpg" alt="Bhavya Photo" />
+    <p id="wishMessage">Wishing you a warm cup of joy and a slice of happiness today!</p>
+    <button id="nextButton">Next Wish ✨</button>
+    <br />
+    <a href="https://devendra-8687.github.io/Devendra/review.html" class="review-link">
+      <button id="reviewButton">📝 Any message for me...</button>
+    </a>
+  </div>
+
+  <script>
+    const data = [
+      {
+        wish: "Wishing you a warm cup of joy and a slice of happiness today!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya1.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya1.jpg')",
+    
+          border: "#ffcc80",
+          text: "#6d4c41",
+          button: "#ff9800"
+        }
+      },
+      {
+        wish: "Another trip around the sun, and you're still shining bright!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya2.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya2.jpg')",
+        
+          border: "#4fc3f7",
+          text: "#01579b",
+          button: "#0288d1"
+        }
+      },
+      {
+        wish: "Your smile lights up every room — keep shining!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya4.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya4.jpg')",
+         
+          border: "#ce93d8",
+          text: "#6a1b9a",
+          button: "#ab47bc"
+        }
+      },
+      {
+        wish: "To the brightest star in my galaxy — Happy Birthday!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya5.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya5.jpg')",
+        
+          border: "#9575cd",
+          text: "#4a148c",
+          button: "#7e57c2"
+        }
+      },
+      {
+       wish: "Float among the stars today — it's your cosmic celebration!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya6.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya6.jpg')",
+          border: "#9575cd",
+          text: "#4a148c",
+          button: "#7e57c2"
+        }
+      },
+      {
+       wish: "From moon dust to Milky Way — may all your dreams come true!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya7.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya7.jpg')",
+          border: "#9575cd",
+          text: "#4a148c",
+          button: "#7e57c2"
+        }
+      },
+      {
+        wish: "You're not just a star — you're the whole damn constellation!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya8.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya8.jpg')",
+          border: "#9575cd",
+          text: "#4a148c",
+          button: "#7e57c2"
+        }
+      },
+      {
+        wish: "The universe is lucky to have someone as wonderful as you!",
+        img: "https://devendra-8687.github.io/Devendra/Bhavya9.jpg",
+        theme: {
+          background: "url('https://devendra-8687.github.io/Devendra/Bhavya9.jpg')",
+          border: "#9575cd",
+          text: "#4a148c",
+          button: "#7e57c2"
+        }
+      }
+    ];
+
+    let currentIndex = 0;
+    const imageEl = document.getElementById('birthdayImage');
+    const messageEl = document.getElementById('wishMessage');
+    const titleEl = document.getElementById('title');
+    const container = document.getElementById('themeContainer');
+    const button = document.getElementById('nextButton');
+    const reviewBtn = document.getElementById('reviewButton');
+    const body = document.body;
+
+    function applyTheme(theme) {
+      container.style.backgroundColor = theme.container;
+      container.style.borderColor = theme.border;
+      messageEl.style.color = theme.text;
+      titleEl.style.color = theme.text;
+      button.style.backgroundColor = theme.button;
+      button.style.color = "#fff";
+      reviewBtn.style.backgroundColor = theme.button;
+      reviewBtn.style.color = "#fff";
+      body.style.backgroundImage = theme.background;
+    }
+
+    function showConfetti() {
+      const duration = 1 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+
+    button.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % data.length;
+      const current = data[currentIndex];
+      imageEl.src = current.img;
+      messageEl.innerText = current.wish;
+      applyTheme(current.theme);
+      showConfetti();
+    });
+
+    applyTheme(data[0].theme);
+  </script>
+
+  <!-- Include confetti script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</body>
+</html>
