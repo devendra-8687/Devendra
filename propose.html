@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>A Special Proposal</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    html, body {
+      height: 100%;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #4a2c2a;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent; 
+    }
+    .container {
+      background: rgba(255 255 255 / 0.85);
+      max-width: 500  px;
+      width: 100%;
+      min-height: 480px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      padding: 50px 30px 60px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      color: #b33a3a;
+      text-align: center;
+      text-shadow: 1px 1px 3px rgba(179, 58, 58, 0.4);
+    }
+
+    p.message {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-bottom: 35px;
+      text-align: center;
+      color: #683838;
+      letter-spacing: 0.02em;
+      white-space: pre-wrap;
+    }
+
+    button, .option-btn {
+      background: #b33a3a;
+      color: white;
+      border: none;
+      padding: 14px 6px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(179, 58, 58, 0.5);
+      transition: background-color 0.3s ease;
+      user-select: none;
+      max-width: 300px;
+      margin: 10px 0;
+    }
+    button:hover, button:focus,
+    .option-btn:hover, .option-btn:focus {
+      background: #802626;
+      outline: none;
+    }
+
+    .hidden-message {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 1rem;
+      color: #922b2b;
+      text-align: center;
+      line-height: 1.4;
+      opacity: 0;
+      max-height: 0;
+      transition: opacity 0.5s ease, max-height 0.7s ease;
+      overflow: hidden;
+    }
+    .hidden-message.visible {
+      opacity: 1;
+      max-height: 400px;
+    }
+
+    .options-container {
+      margin-top: 15px;
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .response-message {
+      margin-top: 25px;
+      font-size: 1rem;
+      color: #3b1f1f;
+      text-align: center;
+      min-height: 2.5em;
+      user-select: text;
+      padding: 0 10px;
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 350px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      p.message {
+        font-size: 1rem;
+      }
+      button, .option-btn {
+        font-size: 1rem;
+        padding: 12px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Proposal message container">
+    <h1>Hey there,</h1>
+    <p class="message" id="initialMessage">
+      I don't know how you will react after knowing this, but it is necessary to know that I have a huge crush on you from the beginning of 11th.
+      Three years have now passed. When we were together till 10th, I considered you my friend and had normal feelings like a friend does.
+      But when we separated, I started to miss you. I wanted to talk to you, and it felt like I was missing some joy in my life.
+      Since then, I helped my friend Sparsh to get his crush, and then I realized I also have a crush on you after understanding what it means.
+      I have many more things to tell you, but I don't want you to take any action based on this.
+      And I don't want to spoil your birthday — please enjoy your special day to the fullest!
+    </p>
+    <button id="revealBtn" aria-expanded="false" aria-controls="optionsContainer">Click here if you want to know more ❤️</button>
+
+    <div class="options-container" id="optionsContainer" aria-live="polite" aria-hidden="true">
+<form action="https://formspree.io/f/mkgrqrrn" method="POST">
+  <label><h3>Answer with your own free will.</h3></label>
+
+  <label>
+    <input type="radio" name="relationship_response" value="I want to continue as friends like before" required>
+    I want to continue as friends like before
+  </label><br>
+
+  <label>
+    <input type="radio" name="relationship_response" value="I accept your proposal" required>
+    I accept your proposal
+  </label><br>
+
+  <label>
+    <input type="radio" name="relationship_response" value="Break things now (no messages, no calls or interactions)" required>
+    Break things now (no messages, no calls or interactions)
+  </label><br>
+
+  <label>
+    <input type="radio" name="relationship_response" value="I also have a crush on you" required>
+    I also have a crush on you
+  </label><br>
+
+  <h2>Any message for me?</h2>
+  <textarea name="review_message" placeholder="Drop your message here..." required></textarea><br>
+
+  <button type="submit">Send</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <script>
+    (() => {
+      const revealBtn = document.getElementById('revealBtn');
+      const optionsContainer = document.getElementById('optionsContainer');
+      const responseMessage = document.getElementById('responseMessage');
+      
+      const option1 = document.getElementById('option1');
+      const option2 = document.getElementById('option2');
+      const option3 = document.getElementById('option3');
+      const option4 = document.getElementById('option4');
+
+      revealBtn.addEventListener('click', () => {
+        revealBtn.style.display = 'none';
+        optionsContainer.style.display = 'flex';
+        optionsContainer.setAttribute('aria-hidden', 'false');
+        responseMessage.textContent = '';
+      });
+
+      option1.addEventListener('click', () => {
+        responseMessage.textContent = "I value our friendship so much. Let's keep being amazing friends just like before.";
+        disableOptions();
+      });
+      option2.addEventListener('click', () => {
+        responseMessage.textContent = "You just made me the happiest! I accept your proposal with all my heart ❤️.";
+        disableOptions();
+      });
+      option3.addEventListener('click', () => {
+        responseMessage.textContent = "I understand. I'll respect your decision and wish you all the best. Goodbye.";
+        disableOptions();
+      });
+      option4.addEventListener('click', () => {
+        responseMessage.textContent = "You feel the same way? That makes me so happy. Let's explore this beautiful feeling together!";
+        disableOptions();
+      });
+
+      function disableOptions() {
+        option1.disabled = true;
+        option2.disabled = true;
+        option3.disabled = true;
+        option4.disabled = true;
+        option1.style.cursor = 'default';
+        option2.style.cursor = 'default';
+        option3.style.cursor = 'default';
+        option4.style.cursor = 'default';
+      }
+    })();
+  </script>
+</body>
+</html>
