@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Surprise for Lucky</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Pacifico', cursive;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 20px;
+      animation: bounce 1.5s infinite;
+      color: #000000;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    #slideshow-container {
+      position: relative;
+      max-width: 90%;
+      margin: 20px auto;
+    }
+
+    .slide-image {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+      transition: opacity 0.8s;
+    }
+
+    .wish-text {
+      font-size: 1.5rem;
+      color: #000000;
+      margin-top: 10px;
+      animation: fadeIn 1s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .nav-btn {
+      background-color: #ffb6c1;
+      border: none;
+      padding: 10px 20px;
+      margin: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: #715965;
+    }
+
+    #surpriseBtn {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      background-color: #ff69b4;
+    }
+
+    #surpriseMsg {
+      display: none;
+      font-size: 2rem;
+      color: #e75480;
+      margin-top: 20px;
+      animation: fadeIn 1s;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthday Lucky Bro...! 🎉</h1>
+
+  <div id="slideshow-container">
+    <img class="slide-image" id="slideImg" src="" alt="Birthday Slide"/>
+    <p class="wish-text" id="wishText"></p>
+  </div>
+
+  <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+  <button class="nav-btn" onclick="nextSlide()">Next →</button>
+  <br>
+  <button class="nav-btn" id="surpriseBtn" onclick="revealSurprise()">Click for a Special Surprise 💖</button>
+
+  <p id="surpriseMsg">Go to the next page... <a href="propose.html" target="_blank">Click Here 💌</a></p>
+
+  <canvas id="fireworksCanvas"></canvas>
+<script>
+    const slides = [
+      { img: "https://devendra-8687.github.io/Devendra/L1.jpg", wish: "Wishing you the happiest birthday, Lucky bro! 💖", bg: "https://devendra-8687.github.io/Devendra/L1.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L2.jpg", wish: "You light up every room you enter. 🌟", bg: "https://devendra-8687.github.io/Devendra/L2.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L3.jpg", wish: "May your day be filled with love and surprises. 🎁", bg: "https://devendra-8687.github.io/Devendra/L3.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L4.jpg", wish: "You’re truly one of a kind. 😺", bg: "https://devendra-8687.github.io/Devendra/L4.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L5.jpg", wish: "Hope you smile like this every day! 😊", bg: "https://devendra-8687.github.io/Devendra/L5.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L6.jpg", wish: "Your kindness brightens the world. 🌸", bg: "https://devendra-8687.github.io/Devendra/L6.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L7.jpg", wish: "Keep chasing your dreams! ✨", bg: "https://devendra-8687.github.io/Devendra/L7.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L8.jpg", wish: "You're magic, never forget that! 🌈", bg: "https://devendra-8687.github.io/Devendra/L8.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L9.jpg", wish: "So grateful to know you. 🥰", bg: "https://devendra-8687.github.io/Devendra/L9.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L10.jpg", wish: "Wishing you a warm cup of joy and a slice of happiness today!", bg: "https://devendra-8687.github.io/Devendra/L10.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L11.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L11.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L12.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L12.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L13.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L13.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L14.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L14.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L15.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L15.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L16.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L16.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L17.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L17.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L18.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L18.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L19.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L19.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L20.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L20.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L21.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L21.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L22.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L22.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L23.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L23.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L24.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L24.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L25.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L25.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L26.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L26.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L27.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L27.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L228.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L228.jpg" },
+      { img: "https://devendra-8687.github.io/Devendra/L29.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L29.jpg" },  
+      { img: "https://devendra-8687.github.io/Devendra/L30.jpg", wish: "Here’s to your special day! 🎂", bg: "https://devendra-8687.github.io/Devendra/L30.jpg" }
+    ];
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+      const slide = slides[currentSlide];
+      const slideImg = document.getElementById('slideImg');
+      const wishText = document.getElementById('wishText');
+
+      slideImg.style.opacity = 0;
+      wishText.style.opacity = 0;
+
+      setTimeout(() => {
+        slideImg.src = slide.img;
+        wishText.textContent = slide.wish;
+        document.body.style.backgroundImage = `url('${slide.bg}')`;
+        slideImg.style.opacity = 1;
+        wishText.style.opacity = 1;
+      }, 300);
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function revealSurprise() {
+      document.getElementById("surpriseMsg").style.display = "block";
+      launchFireworks();
+    }
+
+    function launchFireworks() {
+      const canvas = document.getElementById("fireworksCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let particles = [];
+
+      function createFirework() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height / 2;
+        for (let i = 0; i < 100; i++) {
+          particles.push({
+            x, y,
+            radius: Math.random() * 2 + 1,
+            color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+            angle: Math.random() * Math.PI * 2,
+            speed: Math.random() * 3 + 2,
+            alpha: 1
+          });
+        }
+      }
+
+      function draw() {
+        ctx.fillStyle = "rgba(0,0,0,0.1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        particles = particles.filter(p => p.alpha > 0);
+        for (let p of particles) {
+          p.x += Math.cos(p.angle) * p.speed;
+          p.y += Math.sin(p.angle) * p.speed;
+          p.alpha -= 0.01;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `${p.color.replace("hsl", "hsla").replace(")", `, ${p.alpha})`)}`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      createFirework();
+      setInterval(createFirework, 800);
+      draw();
+    }
+
+    window.onload = () => {
+      showSlide(0);
+    };
+  </script>
+</body>
+</html>
